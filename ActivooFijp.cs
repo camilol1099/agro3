@@ -14,9 +14,10 @@ namespace Entidades
 
         public List<Proveedor> Proveedores { get; set; }
 
-        public ActivoFijo()
+        public ActivooFijp()
         {
             Proveedores = new List<Proveedor>();
+            
         }
 
 

@@ -22,7 +22,7 @@ namespace Entidades
 
         public DetalleVenta() { }
 
-        public DetalleVenta(int idDetalleVenta, int cantidad, decimal precioUnitario, int ventaId, int? cultivoId = null)
+        public DetalleVenta(int idDetalleVenta, int cantidad, decimal precioUnitario, int ventaId, int cultivoId )
         {
             IdDetalleVenta = idDetalleVenta;
             Cantidad = cantidad;

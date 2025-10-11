@@ -17,12 +17,12 @@ namespace Entidades
 
      
         public List<InsumoConsumible> InsumosConsumibles { get; set; }
-        public List<ActivoFijo> ActivosFijos { get; set; }
+        public List<ActivooFijp> ActivosFijos { get; set; }
 
         public Proveedor()
         {
             InsumosConsumibles = new List<InsumoConsumible>();
-            ActivosFijos = new List<ActivoFijo>();
+            ActivosFijos = new List<ActivooFijp>();
         }
     }
 }

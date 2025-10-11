@@ -18,7 +18,7 @@ namespace Entidades
        
         public List<DetalleTarea> DetallesTarea { get; set; }
         public InsumoConsumible InsumoConsumible { get; set; }
-        public ActivoFijo ActivoFijo { get; set; }
+        public ActivooFijp ActivoFijo { get; set; } 
 
         public Insumo()
         {

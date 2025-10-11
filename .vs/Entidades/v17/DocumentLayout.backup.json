@@ -1,61 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\camil\\source\\repos\\Entidades\\",
+  "WorkspaceRootPath": "C:\\Users\\Camilo\\source\\repos\\Proyecto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\insumo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:insumo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\insumoconsumible.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:insumoconsumible.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\tarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:tarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\tipopago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:tipopago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\venta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:venta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\proveedor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:proveedor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\cultivo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:cultivo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\administrador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:administrador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\asignaciontarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:asignaciontarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\empleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:empleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\detalleventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:detalleventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\detalletarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:detalletarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camil\\source\\repos\\entidades\\activoofijp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|c:\\users\\camilo\\source\\repos\\proyecto\\activoofijp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F39658B1-3160-4D8A-A3FF-4851C715768D}|Entidades.csproj|solutionrelative:activoofijp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -69,186 +17,39 @@
           "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Tarea.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\Tarea.cs",
-              "RelativeDocumentMoniker": "Tarea.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\Tarea.cs",
-              "RelativeToolTip": "Tarea.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBgAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T22:16:49.248Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TipoPago.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\TipoPago.cs",
-              "RelativeDocumentMoniker": "TipoPago.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\TipoPago.cs",
-              "RelativeToolTip": "TipoPago.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T21:28:04.843Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "InsumoConsumible.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\InsumoConsumible.cs",
-              "RelativeDocumentMoniker": "InsumoConsumible.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\InsumoConsumible.cs",
-              "RelativeToolTip": "InsumoConsumible.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T23:11:28.1Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Insumo.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\Insumo.cs",
-              "RelativeDocumentMoniker": "Insumo.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\Insumo.cs",
-              "RelativeToolTip": "Insumo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T23:10:06.599Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Venta.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\Venta.cs",
-              "RelativeDocumentMoniker": "Venta.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\Venta.cs",
-              "RelativeToolTip": "Venta.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T21:29:00.835Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\Usuario.cs",
-              "RelativeDocumentMoniker": "Usuario.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\Usuario.cs",
-              "RelativeToolTip": "Usuario.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T21:11:35.849Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Proveedor.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\Proveedor.cs",
-              "RelativeDocumentMoniker": "Proveedor.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\Proveedor.cs",
-              "RelativeToolTip": "Proveedor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T23:13:38.523Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Cultivo.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\Cultivo.cs",
-              "RelativeDocumentMoniker": "Cultivo.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\Cultivo.cs",
-              "RelativeToolTip": "Cultivo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAcwBsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T21:26:57.472Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Administrador.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\Administrador.cs",
-              "RelativeDocumentMoniker": "Administrador.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\Administrador.cs",
-              "RelativeToolTip": "Administrador.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T21:17:57.331Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AsignacionTarea.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\AsignacionTarea.cs",
-              "RelativeDocumentMoniker": "AsignacionTarea.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\AsignacionTarea.cs",
-              "RelativeToolTip": "AsignacionTarea.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T23:07:17.304Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Empleado.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\Empleado.cs",
-              "RelativeDocumentMoniker": "Empleado.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\Empleado.cs",
-              "RelativeToolTip": "Empleado.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T21:24:36.866Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "DetalleVenta.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\DetalleVenta.cs",
-              "RelativeDocumentMoniker": "DetalleVenta.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\DetalleVenta.cs",
-              "RelativeToolTip": "DetalleVenta.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAgwBMAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T22:05:47.251Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "DetalleTarea.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\DetalleTarea.cs",
-              "RelativeDocumentMoniker": "DetalleTarea.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\DetalleTarea.cs",
-              "RelativeToolTip": "DetalleTarea.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T23:09:16.289Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
               "Title": "ActivooFijp.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\Entidades\\ActivooFijp.cs",
+              "DocumentMoniker": "C:\\Users\\Camilo\\source\\repos\\Proyecto\\ActivooFijp.cs",
               "RelativeDocumentMoniker": "ActivooFijp.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\Entidades\\ActivooFijp.cs",
+              "ToolTip": "C:\\Users\\Camilo\\source\\repos\\Proyecto\\ActivooFijp.cs",
               "RelativeToolTip": "ActivooFijp.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T23:12:56.841Z",
+              "WhenOpened": "2025-10-11T20:55:55.35Z",
               "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 169,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }
