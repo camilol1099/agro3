@@ -1,0 +1,6 @@
+C:\Users\camil\Source\Repos\agro3\bin\Debug\Entidades.dll
+C:\Users\camil\Source\Repos\agro3\bin\Debug\Entidades.pdb
+C:\Users\camil\Source\Repos\agro3\obj\Debug\Entidades.csproj.AssemblyReference.cache
+C:\Users\camil\Source\Repos\agro3\obj\Debug\Entidades.csproj.CoreCompileInputs.cache
+C:\Users\camil\Source\Repos\agro3\obj\Debug\Entidades.dll
+C:\Users\camil\Source\Repos\agro3\obj\Debug\Entidades.pdb

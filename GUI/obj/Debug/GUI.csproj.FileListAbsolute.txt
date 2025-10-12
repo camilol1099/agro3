@@ -1,0 +1,14 @@
+C:\Users\camil\Source\Repos\GUI\obj\Debug\GUI.csproj.AssemblyReference.cache
+C:\Users\camil\Source\Repos\GUI\obj\Debug\MainWindow.baml
+C:\Users\camil\Source\Repos\GUI\obj\Debug\MainWindow.g.cs
+C:\Users\camil\Source\Repos\GUI\obj\Debug\App.g.cs
+C:\Users\camil\Source\Repos\GUI\obj\Debug\GUI_MarkupCompile.cache
+C:\Users\camil\Source\Repos\GUI\obj\Debug\GUI.g.resources
+C:\Users\camil\Source\Repos\GUI\obj\Debug\GUI.Properties.Resources.resources
+C:\Users\camil\Source\Repos\GUI\obj\Debug\GUI.csproj.GenerateResource.cache
+C:\Users\camil\Source\Repos\GUI\obj\Debug\GUI.csproj.CoreCompileInputs.cache
+C:\Users\camil\Source\Repos\GUI\bin\Debug\GUI.exe.config
+C:\Users\camil\Source\Repos\GUI\bin\Debug\GUI.exe
+C:\Users\camil\Source\Repos\GUI\bin\Debug\GUI.pdb
+C:\Users\camil\Source\Repos\GUI\obj\Debug\GUI.exe
+C:\Users\camil\Source\Repos\GUI\obj\Debug\GUI.pdb
