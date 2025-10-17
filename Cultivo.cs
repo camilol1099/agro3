@@ -14,17 +14,7 @@ namespace Entidades
         public DateTime FechaCosechaEstimada { get; set; }
         public string AlertaNBn { get; set; }
      
-        public int VentaId { get; set; }
-        public Venta Venta { get; set; }
-
-     
-        public List<DetalleVenta> DetallesVenta { get; set; }
-
-        public Cultivo()
-        {
-            DetallesVenta = new List<DetalleVenta>();
-        }
-         
+       
 
     }
 }

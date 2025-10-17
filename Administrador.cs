@@ -15,7 +15,7 @@ namespace Entidades
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
 
-        public List<Venta> Ventas { get; set; } = new List<Venta>();
+        
         public List<Cultivo> Cultivos { get; set; } = new List<Cultivo>();
     }
 }

@@ -23,6 +23,8 @@ namespace Entidades
             AsignacionesTarea = new List<AsignacionTarea>();
         }
 
+        
+
 
     }
 }

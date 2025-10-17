@@ -12,13 +12,8 @@ namespace Entidades
         public int InsumoId { get; set; }
         public Insumo Insumo { get; set; }
 
-        public List<Proveedor> Proveedores { get; set; }
-
-        public ActivooFijp()
-        {
-            Proveedores = new List<Proveedor>();
-            
-        }
+        
+        
 
 
     }

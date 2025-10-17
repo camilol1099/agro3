@@ -13,11 +13,6 @@ namespace Entidades
         public Insumo Insumo { get; set; }
 
      
-        public List<Proveedor> Proveedores { get; set; }
-
-        public InsumoConsumible()
-        {
-            Proveedores = new List<Proveedor>();
-        }
+       
     }
 }

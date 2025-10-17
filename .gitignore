@@ -1,0 +1,16 @@
+# Archivos y carpetas que no deben subirse a GitHub
+
+# Carpetas de compilación
+bin/
+obj/
+
+# Archivos temporales de Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.pdb
+
+# Otros
+*.log
+*.tmp
