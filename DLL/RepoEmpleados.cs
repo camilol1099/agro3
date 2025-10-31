@@ -5,60 +5,91 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DLL
 {
     public class RepoEmpleados : BaseRepo<Empleado>
     {
-        public RepoEmpleados(string nombreArchivo) : base(nombreArchivo)
+        public List<Empleado> ObtenerEmpleados()
         {
-        }
-       
+            List<Empleado> empleados = new List<Empleado>();
 
-        public override IList<Empleado> Consultar()
-        {
-            try
+            using (var connection = GetConnection())
             {
-                StreamReader lector = new StreamReader(ruta);
-                List<Empleado> lista = new List<Empleado>();
-
-                while (!lector.EndOfStream)
+                connection.Open();
+                string query = "SELECT IdEmpleado, MontoPorHora, MontoMensual , ID_Usu FROM empleado";
+                using (var cmd = new MySqlCommand(query, connection))
                 {
-
-                    lista.Add(Mappear(lector.ReadLine()));
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            empleados.Add(new Empleado
+                            {
+                                IdEmpleado = reader.GetInt16("IdEmpleado"),
+                                MontoPorHora = reader.GetDecimal("MontoPorHora"),
+                                MontoMensual = reader.GetDecimal("MontoMensual"),
+                                IdUsuario = reader.GetInt16("ID_Usu")
+                            });
+                        }
+                    }
                 }
-                lector.Close();
-                return lista;
             }
-            catch (Exception)
+            return empleados;
+        }
+
+        public void GuardarEmpleado(Empleado empleado)
+        {
+            using (var connection = GetConnection())
             {
+                connection.Open();
+                string query = "INSERT INTO empleado (IdEmpleado, MontoPorHora, MontoMensual , ID_Usu) VALUES (@IdEmpleado,@MontoPorHora, @MontoMensual, @ID_Usu)";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@IdEmpleado", empleado.IdEmpleado);
+                    cmd.Parameters.AddWithValue("@MontoPorHora", empleado.MontoPorHora);
+                    cmd.Parameters.AddWithValue("@MontoMensual", empleado.MontoMensual);
+                    cmd.Parameters.AddWithValue("@ID_Usu", empleado.IdUsuario);
 
-                return null;
+                    int filas = cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
+            public void EliminarEmpleado(int idEmpleado)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string query = "DELETE FROM empleado WHERE IdEmpleado = @IdEmpleado";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+                    int filas = cmd.ExecuteNonQuery();
+                }
             }
         }
 
-        private Empleado Mappear(string linea)
-        {
-            Empleado empleado = new Empleado();
-
-            var aux = linea.Split(';');
-
-            empleado.IdEmpleado= int.Parse(aux[0]);
-            empleado.Nombre = aux[1];
-            empleado.Telefono = aux[2];
-            empleado.MontoPorHora = decimal.Parse(aux[3]);
-            empleado.MontoMensual = decimal.Parse(aux[4]);
-            empleado.UsuarioId = int.Parse(aux[5]);
-
-
-
-            return empleado;
+                public void ActualizarEmpleado(Empleado empleado)
+                {
+                    using (var connection = GetConnection())
+                    {
+                        connection.Open();
+                        string query = "UPDATE empleado SET MontoPorHora = @MontoPorHora, MontoMensual = @MontoMensual, ID_Usu = @ID_Usu WHERE IdEmpleado = @IdEmpleado";
+                        using (var cmd = new MySqlCommand(query, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@IdEmpleado", empleado.IdEmpleado);
+                            cmd.Parameters.AddWithValue("@MontoPorHora", empleado.MontoPorHora);
+                            cmd.Parameters.AddWithValue("@MontoMensual", empleado.MontoMensual);
+                            cmd.Parameters.AddWithValue("@ID_Usu", empleado.IdUsuario);
+                            int filas = cmd.ExecuteNonQuery();
+                        }
+                    }
         }
-
-        public override Empleado ObtenerPorId(int id)
-        {
-            return Consultar().FirstOrDefault(x => x.IdEmpleado == id);
-        }
-
     }
-}
+    }
+
+
+

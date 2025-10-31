@@ -3,30 +3,31 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DLL
 {
-    public class RepoCosecha : BaseRepo<Cosecha>
+    public class RepoCultivo : BaseRepo<Cultivo>
     {
-        public List<Cosecha> ObtenerCosechas()
+        public List<Cultivo> ObtenerCultivos()
         {
-            List<Cosecha> cosecha = new List<Cosecha>();
+            List<Cultivo> cosecha = new List<Cultivo>();
 
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "SELECT IdCosecha, NombreLote, FechaSiembra ,FechaCosechaEstimada,AlertaNBn FROM cosecha";
+                string query = "SELECT IdCultivo , NombreLote, FechaSiembra ,FechaCosechaEstimada,AlertaNBn FROM cosecha";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            cosecha.Add(new Cosecha
+                            cosecha.Add(new Cultivo
                             {
-                                IdCosecha = reader.GetInt16("IdEmpleado"),
+                                IdCultivo = reader.GetInt16("IdEmpleado"),
                                 NombreLote = reader.GetString("MontoPorHora"),
                                 FechaSiembra = reader.GetDateTime("MontoMensual"),
                                 FechaCosechaEstimada = reader.GetDateTime("ID_Usu"),
@@ -38,7 +39,9 @@ namespace DLL
             }
             return cosecha;
         }
-        public void GuardarCosecha(Cosecha cosecha)
+
+
+        public void GuardarCultivo(Cultivo cultivo)
         {
             using (var connection = GetConnection())
             {
@@ -46,47 +49,54 @@ namespace DLL
                 string query = "INSERT INTO cosecha (IdCosecha, NombreLote, FechaSiembra ,FechaCosechaEstimada,AlertaNBn) VALUES (@IdCosecha,@NombreLote, @FechaSiembra, @FechaCosechaEstimada,@AlertaNBn)";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@IdCosecha", cosecha.IdCosecha);
-                    cmd.Parameters.AddWithValue("@NombreLote", cosecha.NombreLote);
-                    cmd.Parameters.AddWithValue("@FechaSiembra", cosecha.FechaSiembra);
-                    cmd.Parameters.AddWithValue("@FechaCosechaEstimada", cosecha.FechaCosechaEstimada);
-                    cmd.Parameters.AddWithValue("@AlertaNBn", cosecha.AlertaNBn);
+                    cmd.Parameters.AddWithValue("@IdCosecha", cultivo.IdCultivo);
+                    cmd.Parameters.AddWithValue("@NombreLote", cultivo.NombreLote);
+                    cmd.Parameters.AddWithValue("@FechaSiembra", cultivo.FechaSiembra);
+                    cmd.Parameters.AddWithValue("@FechaCosechaEstimada", cultivo.FechaCosechaEstimada);
+                    cmd.Parameters.AddWithValue("@AlertaNBn", cultivo.AlertaNBn);
                     int filas = cmd.ExecuteNonQuery();
                 }
             }
         }
 
-
-        public void EliminarCosecha(int idCosecha)
+        public void EliminarCultivo(int idCultivo)
         {
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "DELETE FROM cosecha WHERE IdCosecha = @IdCosecha";
+                string query = "DELETE FROM cultivo WHERE IdCultivo = @IdCultivo";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@IdCosecha", idCosecha);
+                    cmd.Parameters.AddWithValue("@IdCultivo", idCultivo);
+                    int filas = cmd.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+        public void ActualizarCultivo(Cultivo cultivo)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string query = "UPDATE cultivo SET NombreLote = @NombreLote, FechaSiembra = @FechaSiembra, FechaCosechaEstimada = @FechaCosechaEstimada, AlertaNBn = @AlertaNBn WHERE IdCultivo = @IdCultivo";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@IdCultivo", cultivo.IdCultivo);
+                    cmd.Parameters.AddWithValue("@NombreLote", cultivo.NombreLote);
+                    cmd.Parameters.AddWithValue("@FechaSiembra", cultivo.FechaSiembra);
+                    cmd.Parameters.AddWithValue("@FechaCosechaEstimada", cultivo.FechaCosechaEstimada);
+                    cmd.Parameters.AddWithValue("@AlertaNBn", cultivo.AlertaNBn);
                     int filas = cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public void ActualizarCosecha(Cosecha cosecha)
-        {
-            using (var connection = GetConnection())
-            {
-                connection.Open();
-                string query = "UPDATE cosecha SET NombreLote = @NombreLote, FechaSiembra = @FechaSiembra, FechaCosechaEstimada = @FechaCosechaEstimada, AlertaNBn = @AlertaNBn WHERE IdCosecha = @IdCosecha";
-                using (var cmd = new MySqlCommand(query, connection))
-                {
-                    cmd.Parameters.AddWithValue("@IdCosecha", cosecha.IdCosecha);
-                    cmd.Parameters.AddWithValue("@NombreLote", cosecha.NombreLote);
-                    cmd.Parameters.AddWithValue("@FechaSiembra", cosecha.FechaSiembra);
-                    cmd.Parameters.AddWithValue("@FechaCosechaEstimada", cosecha.FechaCosechaEstimada);
-                    cmd.Parameters.AddWithValue("@AlertaNBn", cosecha.AlertaNBn);
-                    int filas = cmd.ExecuteNonQuery();
-                }
-            }
-        }
+
     }
 }
+
+
+
+
+

@@ -96,6 +96,7 @@
     <Compile Include="IcrudEscritura.cs" />
     <Compile Include="IcrudLectura.cs" />
     <Compile Include="ServicioCosecha.cs" />
+    <Compile Include="ServicioCultivo.cs" />
     <Compile Include="ServicioEmpleado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,39 +9,45 @@ using System.Collections.ObjectModel;
 
 namespace BLL
 {
-    public class ServicioEmpleado : IcrudEscritura<Empleado>, IcrudLectura<Empleado>
+    public class ServicioEmpleado 
     {
-        RepoEmpleados RepoEmpleado;
-  
-        public ServicioEmpleado()
+
+        RepoEmpleados repo = new RepoEmpleados();
+
+        public List<Empleado> ObtenerEmpleados()
         {
-            RepoEmpleado = new RepoEmpleados(Utils.ARC_Empleado);
-        }
-        public bool Actualizar(Empleado entidad)
-        {
-            throw new NotImplementedException();
+            return repo.ObtenerEmpleados();
         }
 
-        public ReadOnlyCollection<Empleado> Consultar()
+        public void GuardarEmpleado(Empleado empleado)
         {
-            var lista = RepoEmpleado.Consultar();
-            return new ReadOnlyCollection<Empleado>(lista);
+            if (empleado.IdEmpleado <= 0)
+                throw new Exception("El ID del empleado no es válido.");
+            if (empleado.IdUsuario <= 0)
+                throw new Exception("El ID del usuario no puede ser cero.");
+            if (empleado.MontoPorHora <= 0)
+                throw new Exception("El monto por hora debe ser mayor que 0.");
+
+           repo.GuardarEmpleado(empleado);
         }
 
-        public bool Eliminar(Empleado entidad)
+
+        public void EliminarEmpleado(int idEmpleado)
         {
-            throw new NotImplementedException();
+            if (idEmpleado <= 0)
+                throw new Exception("El ID del empleado no es válido.");
+            repo.EliminarEmpleado(idEmpleado);
         }
 
-        public string Guardar(Empleado entidad)
+        public void ActualizarEmpleado(Empleado empleado)
         {
-            //validar
-            return RepoEmpleado.Guardar(entidad);
-        }
-
-        public Empleado ObtenerPorId(int id)
-        {
-            return RepoEmpleado.ObtenerPorId(id);
+            if (empleado.IdEmpleado <= 0)
+                throw new Exception("El ID del empleado no es válido.");
+            if (empleado.IdUsuario <= 0)
+                throw new Exception("El ID del usuario no puede ser cero.");
+            if (empleado.MontoPorHora <= 0)
+                throw new Exception("El monto por hora debe ser mayor que 0.");
+            repo.ActualizarEmpleado(empleado);
         }
 
     }

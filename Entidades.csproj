@@ -96,6 +96,7 @@
     <Compile Include="ActivooFijp.cs" />
     <Compile Include="Administrador.cs" />
     <Compile Include="AsignacionTarea.cs" />
+    <Compile Include="Cosecha.cs" />
     <Compile Include="Cultivo.cs" />
     <Compile Include="DetalleTarea.cs" />
     <Compile Include="Empleado.cs" />

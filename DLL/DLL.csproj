@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="BaseRepo.cs" />
     <Compile Include="RepoCosecha.cs" />
+    <Compile Include="RepoCultivo.cs" />
     <Compile Include="RepoEmpleados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
