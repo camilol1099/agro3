@@ -1,10 +1,7 @@
 ﻿using Entidades;
-using MySql.Data.MySqlClient;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DLL
 {
@@ -12,61 +9,66 @@ namespace DLL
     {
         public List<Cosecha> ObtenerCosechas()
         {
-            List<Cosecha> cosecha = new List<Cosecha>();
+            List<Cosecha> cosechas = new List<Cosecha>();
 
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "SELECT IdCosecha, NombreLote, FechaSiembra ,FechaCosechaEstimada,AlertaNBn FROM cosecha";
-                using (var cmd = new MySqlCommand(query, connection))
+                string query = "SELECT IdCosecha, NombreLote, FechaSiembra, FechaCosechaEstimada, AlertaNBn FROM cosecha";
+
+                using (var cmd = new OracleCommand(query, connection))
                 {
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            cosecha.Add(new Cosecha
+                            cosechas.Add(new Cosecha
                             {
-                                IdCosecha = reader.GetInt16("IdEmpleado"),
-                                NombreLote = reader.GetString("MontoPorHora"),
-                                FechaSiembra = reader.GetDateTime("MontoMensual"),
-                                FechaCosechaEstimada = reader.GetDateTime("ID_Usu"),
-                                AlertaNBn = reader.GetString("AlertaNBn")
+                                IdCosecha = reader.GetInt32(0),
+                                NombreLote = reader.GetString(1),
+                                FechaSiembra = reader.GetDateTime(2),
+                                FechaCosechaEstimada = reader.GetDateTime(3),
+                                AlertaNBn = reader.IsDBNull(4) ? null : reader.GetString(4)
                             });
                         }
                     }
                 }
             }
-            return cosecha;
+            return cosechas;
         }
+
         public void GuardarCosecha(Cosecha cosecha)
         {
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "INSERT INTO cosecha (IdCosecha, NombreLote, FechaSiembra ,FechaCosechaEstimada,AlertaNBn) VALUES (@IdCosecha,@NombreLote, @FechaSiembra, @FechaCosechaEstimada,@AlertaNBn)";
-                using (var cmd = new MySqlCommand(query, connection))
+                string query = "INSERT INTO cosecha (IdCosecha, NombreLote, FechaSiembra, FechaCosechaEstimada, AlertaNBn) " +
+                               "VALUES (:IdCosecha, :NombreLote, :FechaSiembra, :FechaCosechaEstimada, :AlertaNBn)";
+
+                using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@IdCosecha", cosecha.IdCosecha);
-                    cmd.Parameters.AddWithValue("@NombreLote", cosecha.NombreLote);
-                    cmd.Parameters.AddWithValue("@FechaSiembra", cosecha.FechaSiembra);
-                    cmd.Parameters.AddWithValue("@FechaCosechaEstimada", cosecha.FechaCosechaEstimada);
-                    cmd.Parameters.AddWithValue("@AlertaNBn", cosecha.AlertaNBn);
-                    int filas = cmd.ExecuteNonQuery();
+                    cmd.Parameters.Add(new OracleParameter(":IdCosecha", cosecha.IdCosecha));
+                    cmd.Parameters.Add(new OracleParameter(":NombreLote", cosecha.NombreLote));
+                    cmd.Parameters.Add(new OracleParameter(":FechaSiembra", cosecha.FechaSiembra));
+                    cmd.Parameters.Add(new OracleParameter(":FechaCosechaEstimada", cosecha.FechaCosechaEstimada));
+                    cmd.Parameters.Add(new OracleParameter(":AlertaNBn", cosecha.AlertaNBn ?? (object)DBNull.Value));
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
-
 
         public void EliminarCosecha(int idCosecha)
         {
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "DELETE FROM cosecha WHERE IdCosecha = @IdCosecha";
-                using (var cmd = new MySqlCommand(query, connection))
+                string query = "DELETE FROM cosecha WHERE IdCosecha = :IdCosecha";
+
+                using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@IdCosecha", idCosecha);
-                    int filas = cmd.ExecuteNonQuery();
+                    cmd.Parameters.Add(new OracleParameter(":IdCosecha", idCosecha));
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
@@ -76,17 +78,23 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "UPDATE cosecha SET NombreLote = @NombreLote, FechaSiembra = @FechaSiembra, FechaCosechaEstimada = @FechaCosechaEstimada, AlertaNBn = @AlertaNBn WHERE IdCosecha = @IdCosecha";
-                using (var cmd = new MySqlCommand(query, connection))
+                string query = "UPDATE cosecha " +
+                               "SET NombreLote = :NombreLote, FechaSiembra = :FechaSiembra, " +
+                               "FechaCosechaEstimada = :FechaCosechaEstimada, AlertaNBn = :AlertaNBn " +
+                               "WHERE IdCosecha = :IdCosecha";
+
+                using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@IdCosecha", cosecha.IdCosecha);
-                    cmd.Parameters.AddWithValue("@NombreLote", cosecha.NombreLote);
-                    cmd.Parameters.AddWithValue("@FechaSiembra", cosecha.FechaSiembra);
-                    cmd.Parameters.AddWithValue("@FechaCosechaEstimada", cosecha.FechaCosechaEstimada);
-                    cmd.Parameters.AddWithValue("@AlertaNBn", cosecha.AlertaNBn);
-                    int filas = cmd.ExecuteNonQuery();
+                    cmd.Parameters.Add(new OracleParameter(":NombreLote", cosecha.NombreLote));
+                    cmd.Parameters.Add(new OracleParameter(":FechaSiembra", cosecha.FechaSiembra));
+                    cmd.Parameters.Add(new OracleParameter(":FechaCosechaEstimada", cosecha.FechaCosechaEstimada));
+                    cmd.Parameters.Add(new OracleParameter(":AlertaNBn", cosecha.AlertaNBn ?? (object)DBNull.Value));
+                    cmd.Parameters.Add(new OracleParameter(":IdCosecha", cosecha.IdCosecha));
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
     }
 }
+

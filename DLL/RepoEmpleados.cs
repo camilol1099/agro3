@@ -1,12 +1,7 @@
 ﻿using Entidades;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using System.Security.Cryptography.X509Certificates;
 
 namespace DLL
 {
@@ -19,8 +14,8 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "SELECT IdEmpleado, MontoPorHora, MontoMensual , ID_Usu FROM empleado";
-                using (var cmd = new MySqlCommand(query, connection))
+                string query = "SELECT IdEmpleado, MontoPorHora, MontoMensual, ID_Usu FROM empleado";
+                using (var cmd = new OracleCommand(query, connection))
                 {
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -28,10 +23,10 @@ namespace DLL
                         {
                             empleados.Add(new Empleado
                             {
-                                IdEmpleado = reader.GetInt16("IdEmpleado"),
-                                MontoPorHora = reader.GetDecimal("MontoPorHora"),
-                                MontoMensual = reader.GetDecimal("MontoMensual"),
-                                IdUsuario = reader.GetInt16("ID_Usu")
+                                IdEmpleado = reader.GetInt32(0),
+                                MontoPorHora = reader.GetDecimal(1),
+                                MontoMensual = reader.GetDecimal(2),
+                                IdUsuario = reader.GetInt32(3)
                             });
                         }
                     }
@@ -45,51 +40,56 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "INSERT INTO empleado (IdEmpleado, MontoPorHora, MontoMensual , ID_Usu) VALUES (@IdEmpleado,@MontoPorHora, @MontoMensual, @ID_Usu)";
-                using (var cmd = new MySqlCommand(query, connection))
+                string query = "INSERT INTO empleado (IdEmpleado, MontoPorHora, MontoMensual, ID_Usu) " +
+                               "VALUES (:IdEmpleado, :MontoPorHora, :MontoMensual, :ID_Usu)";
+                using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@IdEmpleado", empleado.IdEmpleado);
-                    cmd.Parameters.AddWithValue("@MontoPorHora", empleado.MontoPorHora);
-                    cmd.Parameters.AddWithValue("@MontoMensual", empleado.MontoMensual);
-                    cmd.Parameters.AddWithValue("@ID_Usu", empleado.IdUsuario);
+                    cmd.Parameters.Add(new OracleParameter(":IdEmpleado", empleado.IdEmpleado));
+                    cmd.Parameters.Add(new OracleParameter(":MontoPorHora", empleado.MontoPorHora));
+                    cmd.Parameters.Add(new OracleParameter(":MontoMensual", empleado.MontoMensual));
+                    cmd.Parameters.Add(new OracleParameter(":ID_Usu", empleado.IdUsuario));
 
-                    int filas = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
-
             }
         }
-            public void EliminarEmpleado(int idEmpleado)
+
+        public void EliminarEmpleado(int idEmpleado)
         {
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "DELETE FROM empleado WHERE IdEmpleado = @IdEmpleado";
-                using (var cmd = new MySqlCommand(query, connection))
+                string query = "DELETE FROM empleado WHERE IdEmpleado = :IdEmpleado";
+                using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
-                    int filas = cmd.ExecuteNonQuery();
+                    cmd.Parameters.Add(new OracleParameter(":IdEmpleado", idEmpleado));
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
 
-                public void ActualizarEmpleado(Empleado empleado)
+        public void ActualizarEmpleado(Empleado empleado)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string query = "UPDATE empleado " +
+                               "SET MontoPorHora = :MontoPorHora, MontoMensual = :MontoMensual, ID_Usu = :ID_Usu " +
+                               "WHERE IdEmpleado = :IdEmpleado";
+                using (var cmd = new OracleCommand(query, connection))
                 {
-                    using (var connection = GetConnection())
-                    {
-                        connection.Open();
-                        string query = "UPDATE empleado SET MontoPorHora = @MontoPorHora, MontoMensual = @MontoMensual, ID_Usu = @ID_Usu WHERE IdEmpleado = @IdEmpleado";
-                        using (var cmd = new MySqlCommand(query, connection))
-                        {
-                            cmd.Parameters.AddWithValue("@IdEmpleado", empleado.IdEmpleado);
-                            cmd.Parameters.AddWithValue("@MontoPorHora", empleado.MontoPorHora);
-                            cmd.Parameters.AddWithValue("@MontoMensual", empleado.MontoMensual);
-                            cmd.Parameters.AddWithValue("@ID_Usu", empleado.IdUsuario);
-                            int filas = cmd.ExecuteNonQuery();
-                        }
-                    }
+                    cmd.Parameters.Add(new OracleParameter(":MontoPorHora", empleado.MontoPorHora));
+                    cmd.Parameters.Add(new OracleParameter(":MontoMensual", empleado.MontoMensual));
+                    cmd.Parameters.Add(new OracleParameter(":ID_Usu", empleado.IdUsuario));
+                    cmd.Parameters.Add(new OracleParameter(":IdEmpleado", empleado.IdEmpleado));
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
-    }
+}
+
 
 
 

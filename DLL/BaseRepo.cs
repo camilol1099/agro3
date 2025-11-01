@@ -1,21 +1,24 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 
 namespace DLL
 {
    public  abstract class BaseRepo<T>
     {
-        protected string connectionString =
-           "Server=localhost;Database=agro_smart;Uid=root;Pwd=Santi2223;";
+       
+       string connectionString = "User Id=root;Password=Santi2223;Data Source=localhost:1521/XEPDB1;";
 
-        protected MySqlConnection GetConnection()
+
+        protected OracleConnection GetConnection()
         {
-            return new MySqlConnection(connectionString);
+            
+            return new OracleConnection(connectionString);
         }
+       
     }
 }
