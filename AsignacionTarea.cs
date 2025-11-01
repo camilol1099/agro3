@@ -11,6 +11,7 @@ namespace Entidades
 
         public int IdAsigTarea { get; set; }
         public decimal HorasTrabajadas { get; set; }
+        public int Jornadas_Trabajadas { get; set; }    
 
         public int EmpleadoId { get; set; }
         public Empleado Empleado { get; set; }
@@ -19,10 +20,11 @@ namespace Entidades
 
         public AsignacionTarea() { }
 
-        public AsignacionTarea(int idAsigTarea, decimal horasTrabajadas, int empleadoId, int tareaId)
+        public AsignacionTarea(int idAsigTarea, decimal horasTrabajadas, int jornadas_Trabajadas, int empleadoId, int tareaId)
         {
             IdAsigTarea = idAsigTarea;
             HorasTrabajadas = horasTrabajadas;
+            Jornadas_Trabajadas = jornadas_Trabajadas;
             EmpleadoId = empleadoId;
             TareaId = tareaId;
         }

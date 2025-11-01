@@ -12,6 +12,7 @@ namespace Entidades
         public int IdEmpleado { get; set; }
         public decimal MontoPorHora { get; set; }
         public decimal MontoMensual { get; set; }
+        public decimal Monto_Por_Jornal { get; set; }
 
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }

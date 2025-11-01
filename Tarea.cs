@@ -15,8 +15,11 @@ namespace Entidades
         public DateTime FechaProgramada { get; set; }
         public string Estado { get; set; }
         public decimal TiempoTotalTarea { get; set; }
+        public int Costo_transporte { get; set; }
 
-       
+
+
+
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
 
