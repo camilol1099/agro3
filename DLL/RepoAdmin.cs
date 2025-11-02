@@ -2,39 +2,36 @@
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DLL
 {
-    public class RepoAdmin: BaseRepo<Administrador>
+    public class RepoAdmin : BaseRepo<Administrador>
     {
-        public List<Administrador> ObtenerEmpleados()
+        public List<Administrador> ObtenerAdministradores()
         {
-            List<Administrador> admin = new List<Administrador>();
+            List<Administrador> administradores = new List<Administrador>();
 
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "SELECT IdEmpleado, MontoPorHora, MontoMensual, ID_Usu FROM empleado";
+                string query = "SELECT IdAdministrador, MontoMensual, UsuarioId FROM Administrador";
+
                 using (var cmd = new OracleCommand(query, connection))
+                using (var reader = cmd.ExecuteReader())
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        administradores.Add(new Administrador
                         {
-                            admin.Add(new Administrador
-                            {
-                                IdAdministrador = reader.GetInt32(0),
-                                MontoMensual = reader.GetDecimal(2),
-                                UsuarioId = reader.GetInt32(3)
-                            });
-                        }
+                            IdAdministrador = Convert.ToInt32(reader["IdAdministrador"]),
+                            MontoMensual = Convert.ToDecimal(reader["MontoMensual"]),
+                            UsuarioId = Convert.ToInt32(reader["UsuarioId"])
+                        });
                     }
                 }
             }
-            return admin;
+
+            return administradores;
         }
 
         public void GuardarAdmin(Administrador admin)
@@ -42,13 +39,17 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "INSERT INTO empleado (IdEmpleado, MontoMensual, ID_Usu) " +
-                               "VALUES (:IdEmpleado, :MontoMensual, :ID_Usu)";
+
+                // ⚙️ Usamos secuencia SEQ_ADMIN para generar el ID automáticamente
+                string query = @"INSERT INTO Administrador 
+                                (IdAdministrador, MontoMensual, UsuarioId)
+                                VALUES (SEQ_ADMIN.NEXTVAL, :MontoMensual, :UsuarioId)";
+
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(new OracleParameter(":IdEmpleado", admin.IdAdministrador));
-                    cmd.Parameters.Add(new OracleParameter(":MontoMensual", admin.MontoMensual));
-                    cmd.Parameters.Add(new OracleParameter(":ID_Usu", admin.UsuarioId));
+                    cmd.Parameters.Add(":MontoMensual", admin.MontoMensual);
+                    cmd.Parameters.Add(":UsuarioId", admin.UsuarioId);
+
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -59,30 +60,36 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "DELETE FROM empleado WHERE IdEmpleado = :IdEmpleado";
+                string query = "DELETE FROM Administrador WHERE IdAdministrador = :IdAdministrador";
+
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(new OracleParameter(":IdEmpleado", idAdmin));
+                    cmd.Parameters.Add(":IdAdministrador", idAdmin);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-       public void ActualizarAdmin(Administrador admin)
+        public void ActualizarAdmin(Administrador admin)
         {
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "UPDATE empleado SET MontoMensual = :MontoMensual, ID_Usu = :ID_Usu WHERE IdEmpleado = :IdEmpleado";
+
+                string query = @"UPDATE Administrador 
+                                 SET MontoMensual = :MontoMensual, 
+                                     UsuarioId = :UsuarioId 
+                                 WHERE IdAdministrador = :IdAdministrador";
+
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(new OracleParameter(":MontoMensual", admin.MontoMensual));
-                    cmd.Parameters.Add(new OracleParameter(":ID_Usu", admin.UsuarioId));
-                    cmd.Parameters.Add(new OracleParameter(":IdEmpleado", admin.IdAdministrador));
+                    cmd.Parameters.Add(":MontoMensual", admin.MontoMensual);
+                    cmd.Parameters.Add(":UsuarioId", admin.UsuarioId);
+                    cmd.Parameters.Add(":IdAdministrador", admin.IdAdministrador);
+
                     cmd.ExecuteNonQuery();
                 }
             }
         }
     }
 }
-

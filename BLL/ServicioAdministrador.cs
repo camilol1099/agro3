@@ -12,7 +12,8 @@ namespace BLL
         RepoAdmin repo = new RepoAdmin();
         public List<Entidades.Administrador> ObtenerAdministradores()
         {
-            return repo.ObtenerEmpleados();
+
+            return repo.ObtenerAdministradores();
         }
         public void GuardarAdministrador(Entidades.Administrador admin)
         {
@@ -31,7 +32,7 @@ namespace BLL
 
         public Entidades.Administrador ObtenerAdministradorPorId(int idAdmin)
         {
-            var administradores = repo.ObtenerEmpleados();
+            var administradores = repo.ObtenerAdministradores();
             var admin = administradores.FirstOrDefault(a => a.IdAdministrador == idAdmin);
             if (admin == null)
                 throw new Exception("Administrador no encontrado.");

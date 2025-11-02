@@ -16,7 +16,7 @@ namespace Entidades
         public string Estado { get; set; }
         public decimal TiempoTotalTarea { get; set; }
 
-       
+        public int Costo_Transporte { get; set; }
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
 

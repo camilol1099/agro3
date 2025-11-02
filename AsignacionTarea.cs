@@ -12,6 +12,7 @@ namespace Entidades
         public int IdAsigTarea { get; set; }
         public decimal HorasTrabajadas { get; set; }
 
+        public int Jornadas_Trabajadas { get; set; }
         public int EmpleadoId { get; set; }
         public Empleado Empleado { get; set; }
         public int TareaId { get; set; }

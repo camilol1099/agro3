@@ -14,23 +14,21 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "SELECT IdCultivo, NombreLote, FechaSiembra, FechaCosechaEstimada, AlertaNBn FROM cultivo";
+                string query = "SELECT IdCultivo, NombreLote, FechaSiembra, FechaCosechaEstimada, AlertaNBn FROM Cultivo";
 
                 using (var cmd = new OracleCommand(query, connection))
+                using (var reader = cmd.ExecuteReader())
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        cultivos.Add(new Cultivo
                         {
-                            cultivos.Add(new Cultivo
-                            {
-                                IdCultivo = reader.GetInt32(0),
-                                NombreLote = reader.GetString(1),
-                                FechaSiembra = reader.GetDateTime(2),
-                                FechaCosechaEstimada = reader.GetDateTime(3),
-                                AlertaNBn = reader.IsDBNull(4) ? null : reader.GetString(4)
-                            });
-                        }
+                            IdCultivo = Convert.ToInt32(reader["IdCultivo"]),
+                            NombreLote = reader["NombreLote"].ToString(),
+                            FechaSiembra = Convert.ToDateTime(reader["FechaSiembra"]),
+                            FechaCosechaEstimada = Convert.ToDateTime(reader["FechaCosechaEstimada"]),
+                            AlertaNBn = reader["AlertaNBn"] == DBNull.Value ? null : reader["AlertaNBn"].ToString()
+                        });
                     }
                 }
             }
@@ -42,16 +40,18 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "INSERT INTO cultivo (IdCultivo, NombreLote, FechaSiembra, FechaCosechaEstimada, AlertaNBn) " +
-                               "VALUES (:IdCultivo, :NombreLote, :FechaSiembra, :FechaCosechaEstimada, :AlertaNBn)";
+
+                // ⚙️ Usamos secuencia para autogenerar el IdCultivo
+                string query = @"INSERT INTO Cultivo 
+                                (IdCultivo, NombreLote, FechaSiembra, FechaCosechaEstimada, AlertaNBn)
+                                VALUES (SEQ_CULTIVO.NEXTVAL, :NombreLote, :FechaSiembra, :FechaCosechaEstimada, :AlertaNBn)";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(new OracleParameter(":IdCultivo", cultivo.IdCultivo));
-                    cmd.Parameters.Add(new OracleParameter(":NombreLote", cultivo.NombreLote));
-                    cmd.Parameters.Add(new OracleParameter(":FechaSiembra", cultivo.FechaSiembra));
-                    cmd.Parameters.Add(new OracleParameter(":FechaCosechaEstimada", cultivo.FechaCosechaEstimada));
-                    cmd.Parameters.Add(new OracleParameter(":AlertaNBn", cultivo.AlertaNBn ?? (object)DBNull.Value));
+                    cmd.Parameters.Add(":NombreLote", cultivo.NombreLote);
+                    cmd.Parameters.Add(":FechaSiembra", cultivo.FechaSiembra);
+                    cmd.Parameters.Add(":FechaCosechaEstimada", cultivo.FechaCosechaEstimada);
+                    cmd.Parameters.Add(":AlertaNBn", cultivo.AlertaNBn ?? (object)DBNull.Value);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -63,11 +63,11 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "DELETE FROM cultivo WHERE IdCultivo = :IdCultivo";
+                string query = "DELETE FROM Cultivo WHERE IdCultivo = :IdCultivo";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(new OracleParameter(":IdCultivo", idCultivo));
+                    cmd.Parameters.Add(":IdCultivo", idCultivo);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -78,18 +78,21 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "UPDATE cultivo " +
-                               "SET NombreLote = :NombreLote, FechaSiembra = :FechaSiembra, " +
-                               "FechaCosechaEstimada = :FechaCosechaEstimada, AlertaNBn = :AlertaNBn " +
-                               "WHERE IdCultivo = :IdCultivo";
+
+                string query = @"UPDATE Cultivo 
+                                 SET NombreLote = :NombreLote,
+                                     FechaSiembra = :FechaSiembra,
+                                     FechaCosechaEstimada = :FechaCosechaEstimada,
+                                     AlertaNBn = :AlertaNBn
+                                 WHERE IdCultivo = :IdCultivo";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(new OracleParameter(":NombreLote", cultivo.NombreLote));
-                    cmd.Parameters.Add(new OracleParameter(":FechaSiembra", cultivo.FechaSiembra));
-                    cmd.Parameters.Add(new OracleParameter(":FechaCosechaEstimada", cultivo.FechaCosechaEstimada));
-                    cmd.Parameters.Add(new OracleParameter(":AlertaNBn", cultivo.AlertaNBn ?? (object)DBNull.Value));
-                    cmd.Parameters.Add(new OracleParameter(":IdCultivo", cultivo.IdCultivo));
+                    cmd.Parameters.Add(":NombreLote", cultivo.NombreLote);
+                    cmd.Parameters.Add(":FechaSiembra", cultivo.FechaSiembra);
+                    cmd.Parameters.Add(":FechaCosechaEstimada", cultivo.FechaCosechaEstimada);
+                    cmd.Parameters.Add(":AlertaNBn", cultivo.AlertaNBn ?? (object)DBNull.Value);
+                    cmd.Parameters.Add(":IdCultivo", cultivo.IdCultivo);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -97,6 +100,7 @@ namespace DLL
         }
     }
 }
+
 
 
 

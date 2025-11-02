@@ -27,8 +27,12 @@ namespace BLL
                 throw new Exception("El ID del usuario no puede ser cero.");
             if (empleado.MontoPorHora <= 0)
                 throw new Exception("El monto por hora debe ser mayor que 0.");
+            if (empleado.MontoMensual <= 0)
+                throw new Exception("El monto mensual debe ser mayor que 0.");
+            if (empleado.Monto_Por_Jornal <= 0)
+                throw new Exception("El monto por jornal debe ser mayor que 0.");
 
-           repo.GuardarEmpleado(empleado);
+            repo.GuardarEmpleado(empleado);
         }
 
 
@@ -48,6 +52,11 @@ namespace BLL
             if (empleado.MontoPorHora <= 0)
                 throw new Exception("El monto por hora debe ser mayor que 0.");
             repo.ActualizarEmpleado(empleado);
+
+            if (empleado.MontoMensual <= 0)
+                throw new Exception("El monto mensual debe ser mayor que 0.");
+            if (empleado.Monto_Por_Jornal <= 0)
+                throw new Exception("El monto por jornal debe ser mayor que 0.");
         }
 
     }

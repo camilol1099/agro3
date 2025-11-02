@@ -14,24 +14,25 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "SELECT IdEmpleado, MontoPorHora, MontoMensual, ID_Usu FROM empleado";
+                string query = "SELECT IdEmpleado, MontoPorHora, MontoMensual, Monto_Por_Jornal, UsuarioId FROM Empleado";
+
                 using (var cmd = new OracleCommand(query, connection))
+                using (var reader = cmd.ExecuteReader())
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        empleados.Add(new Empleado
                         {
-                            empleados.Add(new Empleado
-                            {
-                                IdEmpleado = reader.GetInt32(0),
-                                MontoPorHora = reader.GetDecimal(1),
-                                MontoMensual = reader.GetDecimal(2),
-                                IdUsuario = reader.GetInt32(3)
-                            });
-                        }
+                            IdEmpleado = Convert.ToInt32(reader["IdEmpleado"]),
+                            MontoPorHora = Convert.ToDecimal(reader["MontoPorHora"]),
+                            MontoMensual = Convert.ToDecimal(reader["MontoMensual"]),
+                            Monto_Por_Jornal = Convert.ToInt32(reader["Monto_Por_Jornal"]),
+                            IdUsuario = Convert.ToInt32(reader["UsuarioId"])
+                        });
                     }
                 }
             }
+
             return empleados;
         }
 
@@ -40,14 +41,19 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "INSERT INTO empleado (IdEmpleado, MontoPorHora, MontoMensual, ID_Usu) " +
-                               "VALUES (:IdEmpleado, :MontoPorHora, :MontoMensual, :ID_Usu)";
+
+                // ⚙️ Usamos la secuencia SEQ_EMPLEADO para generar el Id automáticamente
+                string query = @"INSERT INTO Empleado 
+                                (IdEmpleado, MontoPorHora, MontoMensual, Monto_Por_Jornal, UsuarioId)
+                                 VALUES (:IdEmpleado, :MontoPorHora, :MontoMensual, :Monto_Por_Jornal, :UsuarioId)";
+
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(new OracleParameter(":IdEmpleado", empleado.IdEmpleado));
-                    cmd.Parameters.Add(new OracleParameter(":MontoPorHora", empleado.MontoPorHora));
-                    cmd.Parameters.Add(new OracleParameter(":MontoMensual", empleado.MontoMensual));
-                    cmd.Parameters.Add(new OracleParameter(":ID_Usu", empleado.IdUsuario));
+                    cmd.Parameters.Add(":IdEmpleado", empleado.IdEmpleado);
+                    cmd.Parameters.Add(":MontoPorHora", empleado.MontoPorHora);
+                    cmd.Parameters.Add(":MontoMensual", empleado.MontoMensual);
+                    cmd.Parameters.Add(":Monto_Por_Jornal", empleado.Monto_Por_Jornal);
+                    cmd.Parameters.Add(":UsuarioId", empleado.IdUsuario);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -59,10 +65,11 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "DELETE FROM empleado WHERE IdEmpleado = :IdEmpleado";
+                string query = "DELETE FROM Empleado WHERE IdEmpleado = :IdEmpleado";
+
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(new OracleParameter(":IdEmpleado", idEmpleado));
+                    cmd.Parameters.Add(":IdEmpleado", idEmpleado);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -73,15 +80,21 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "UPDATE empleado " +
-                               "SET MontoPorHora = :MontoPorHora, MontoMensual = :MontoMensual, ID_Usu = :ID_Usu " +
-                               "WHERE IdEmpleado = :IdEmpleado";
+
+                string query = @"UPDATE Empleado
+                                 SET MontoPorHora = :MontoPorHora,
+                                     MontoMensual = :MontoMensual,
+                                     Monto_Por_Jornal = :Monto_Por_Jornal,
+                                     UsuarioId = :UsuarioId
+                                 WHERE IdEmpleado = :IdEmpleado";
+
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(new OracleParameter(":MontoPorHora", empleado.MontoPorHora));
-                    cmd.Parameters.Add(new OracleParameter(":MontoMensual", empleado.MontoMensual));
-                    cmd.Parameters.Add(new OracleParameter(":ID_Usu", empleado.IdUsuario));
-                    cmd.Parameters.Add(new OracleParameter(":IdEmpleado", empleado.IdEmpleado));
+                    cmd.Parameters.Add(":MontoPorHora", empleado.MontoPorHora);
+                    cmd.Parameters.Add(":MontoMensual", empleado.MontoMensual);
+                    cmd.Parameters.Add(":Monto_Por_Jornal", empleado.Monto_Por_Jornal);
+                    cmd.Parameters.Add(":UsuarioId", empleado.IdUsuario);
+                    cmd.Parameters.Add(":IdEmpleado", empleado.IdEmpleado);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -89,6 +102,7 @@ namespace DLL
         }
     }
 }
+
 
 
 

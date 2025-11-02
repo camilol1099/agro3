@@ -35,7 +35,7 @@ namespace BLL
             if (activooFijp.InsumoId <= 0)
                 throw new Exception("El ID del activo fijo no es válido.");
             
-            repo.ActualizarActivo(activooFijp);
+            repo.Actualizar(activooFijp);
         }
     }
 }

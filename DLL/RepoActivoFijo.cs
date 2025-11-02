@@ -3,7 +3,6 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 
-
 namespace DLL
 {
     public class RepoActivoFijo : BaseRepo<ActivooFijp>
@@ -11,95 +10,74 @@ namespace DLL
         public List<ActivooFijp> ObtenerTodos()
         {
             List<ActivooFijp> lista = new List<ActivooFijp>();
-            try
+
+            using (var conexion = GetConnection())
             {
-                using (var conexion = GetConnection())
+                conexion.Open();
+                string query = "SELECT Id_Insumo FROM Activofijo";
+
+                using (var comando = new OracleCommand(query, conexion))
+                using (var lector = comando.ExecuteReader())
                 {
-                    conexion.Open();
-                    string query = "SELECT Id_Insumo FROM activofijo";
-                    using (var comando = new OracleCommand(query, conexion))
-                    using (var lector = comando.ExecuteReader())
+                    while (lector.Read())
                     {
-                        while (lector.Read())
+                        lista.Add(new ActivooFijp
                         {
-                            ActivooFijp activo = new ActivooFijp
-                            {
-                                InsumoId = Convert.ToInt32(lector["Id_Insumo"])
-                            };
-                            lista.Add(activo);
-                        }
+                            InsumoId = Convert.ToInt32(lector["Id_Insumo"])
+                        });
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener activos fijos: " + ex.Message);
-            }
+
             return lista;
         }
 
-        public bool Insertar(ActivooFijp activo)
+        public void Insertar(ActivooFijp activo)
         {
-            try
+            using (var conexion = GetConnection())
             {
-                using (var conexion = GetConnection())
+                conexion.Open();
+                string query = "INSERT INTO Activofijo (Id_Insumo) VALUES (:InsumoId)";
+
+                using (var comando = new OracleCommand(query, conexion))
                 {
-                    conexion.Open();
-                    string query = "INSERT INTO activofijo (Id_Insumo) VALUES (:InsumoId)";
-                    using (var comando = new OracleCommand(query, conexion))
-                    {
-                        comando.Parameters.Add(new OracleParameter(":InsumoId", activo.InsumoId));
-                        return comando.ExecuteNonQuery() > 0;
-                    }
+                    comando.Parameters.Add(":InsumoId", activo.InsumoId);
+                    comando.ExecuteNonQuery();
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al insertar activo fijo: " + ex.Message);
             }
         }
 
-        public bool Eliminar(int id)
+        public void Actualizar(ActivooFijp activo)
         {
-            try
+            using (var conexion = GetConnection())
             {
-                using (var conexion = GetConnection())
+                conexion.Open();
+                string query = "UPDATE Activofijo SET Id_Insumo = :NuevoId WHERE Id_Insumo = :IdActual";
+
+                using (var comando = new OracleCommand(query, conexion))
                 {
-                    conexion.Open();
-                    string query = "DELETE FROM activofijo WHERE Id_Insumo = :id";
-                    using (var comando = new OracleCommand(query, conexion))
-                    {
-                        comando.Parameters.Add(new OracleParameter(":id", id));
-                        return comando.ExecuteNonQuery() > 0;
-                    }
+                    comando.Parameters.Add(":NuevoId", activo.InsumoId);
+                    comando.Parameters.Add(":IdActual", activo.InsumoId);
+                    comando.ExecuteNonQuery();
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al eliminar activo fijo: " + ex.Message);
             }
         }
 
-        public bool ActualizarActivo(ActivooFijp activo)
+        public void Eliminar(int id)
         {
-            try
+            using (var conexion = GetConnection())
             {
-                using (var conexion = GetConnection())
+                conexion.Open();
+                string query = "DELETE FROM Activofijo WHERE Id_Insumo = :Id";
+
+                using (var comando = new OracleCommand(query, conexion))
                 {
-                    conexion.Open();
-                    string query = "UPDATE activofijo SET Id_Insumo = :InsumoId WHERE Id_Insumo = :InsumoId";
-                    using (var comando = new OracleCommand(query, conexion))
-                    {
-                        comando.Parameters.Add(new OracleParameter(":InsumoId", activo.InsumoId));
-                        return comando.ExecuteNonQuery() > 0;
-                    }
+                    comando.Parameters.Add(":Id", id);
+                    comando.ExecuteNonQuery();
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al actualizar activo fijo: " + ex.Message);
             }
         }
     }
 }
+
 
