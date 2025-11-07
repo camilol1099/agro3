@@ -10,12 +10,14 @@ namespace Entidades
     public class Usuario
     {
         public int IdUsuario { get; set; }
-        public string Cedula { get; set; }
-        public string Nombre { get; set; }
+        public string Primer_Nombre { get; set; }
+        public string Segundo_Nombre { get; set; }
+        public string Apellido_Pri { get; set; }
+
+        public string Apellido_Segu { get; set; }
         public string Email { get; set; }
         public string Contraseña { get; set; }
-        public string Telefono { get; set; }
-        public string TipoUsuario { get; set; }
+        public long Telefono { get; set; }
 
         public Empleado Empleado { get; set; }
         public Administrador Administrador { get; set; }

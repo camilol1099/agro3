@@ -11,7 +11,7 @@ namespace DLL
    public  abstract class BaseRepo<T>
     {
        
-       string connectionString = "User Id=AGROSMART;Password=AGRO123;Data Source = localhost:1521/XEPDB1";
+       string connectionString = "User Id=AGROSMART_;Password=agro123;Data Source = localhost:1521/XEPDB1";
 
 
         protected OracleConnection GetConnection()

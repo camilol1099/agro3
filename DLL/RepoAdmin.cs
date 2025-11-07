@@ -14,7 +14,7 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "SELECT IdAdministrador, MontoMensual, UsuarioId FROM Administrador";
+                string query = "SELECT ID_USUARIO, MONTO_MENSUAL FROM ADMINISTRADOR";
 
                 using (var cmd = new OracleCommand(query, connection))
                 using (var reader = cmd.ExecuteReader())
@@ -23,9 +23,8 @@ namespace DLL
                     {
                         administradores.Add(new Administrador
                         {
-                            IdAdministrador = Convert.ToInt32(reader["IdAdministrador"]),
-                            MontoMensual = Convert.ToDecimal(reader["MontoMensual"]),
-                            UsuarioId = Convert.ToInt32(reader["UsuarioId"])
+                            UsuarioId = Convert.ToInt32(reader["ID_USUARIO"]),
+                            MontoMensual = Convert.ToDecimal(reader["MONTO_MENSUAL"])
                         });
                     }
                 }
@@ -40,31 +39,29 @@ namespace DLL
             {
                 connection.Open();
 
-                // ⚙️ Usamos secuencia SEQ_ADMIN para generar el ID automáticamente
-                string query = @"INSERT INTO Administrador 
-                                (IdAdministrador, MontoMensual, UsuarioId)
-                                VALUES (SEQ_ADMIN.NEXTVAL, :MontoMensual, :UsuarioId)";
+                string query = @"INSERT INTO ADMINISTRADOR (ID_USUARIO, MONTO_MENSUAL)
+                                 VALUES (:ID_USUARIO, :MONTO_MENSUAL)";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(":MontoMensual", admin.MontoMensual);
-                    cmd.Parameters.Add(":UsuarioId", admin.UsuarioId);
+                    cmd.Parameters.Add(":ID_USUARIO", admin.UsuarioId);
+                    cmd.Parameters.Add(":MONTO_MENSUAL", admin.MontoMensual);
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public void EliminarAdmin(int idAdmin)
+        public void EliminarAdmin(int idUsuario)
         {
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "DELETE FROM Administrador WHERE IdAdministrador = :IdAdministrador";
+                string query = "DELETE FROM ADMINISTRADOR WHERE ID_USUARIO = :ID_USUARIO";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(":IdAdministrador", idAdmin);
+                    cmd.Parameters.Add(":ID_USUARIO", idUsuario);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -76,16 +73,14 @@ namespace DLL
             {
                 connection.Open();
 
-                string query = @"UPDATE Administrador 
-                                 SET MontoMensual = :MontoMensual, 
-                                     UsuarioId = :UsuarioId 
-                                 WHERE IdAdministrador = :IdAdministrador";
+                string query = @"UPDATE ADMINISTRADOR 
+                                 SET MONTO_MENSUAL = :MONTO_MENSUAL
+                                 WHERE ID_USUARIO = :ID_USUARIO";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(":MontoMensual", admin.MontoMensual);
-                    cmd.Parameters.Add(":UsuarioId", admin.UsuarioId);
-                    cmd.Parameters.Add(":IdAdministrador", admin.IdAdministrador);
+                    cmd.Parameters.Add(":MONTO_MENSUAL", admin.MontoMensual);
+                    cmd.Parameters.Add(":ID_USUARIO", admin.UsuarioId);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -93,3 +88,4 @@ namespace DLL
         }
     }
 }
+

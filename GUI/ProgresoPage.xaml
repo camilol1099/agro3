@@ -1,0 +1,187 @@
+﻿<Page x:Class="Gui.ProgresoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Gui"
+      mc:Ignorable="d"
+      d:DesignHeight="720" d:DesignWidth="1080"
+      Title="ProcesoPage"
+      Background="#F0F2F5">
+
+    <Page.Resources>
+        <!-- Título de sección -->
+        <Style TargetType="TextBlock" x:Key="SectionTitleStyle">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#2F5233"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+
+        <!-- Estilo de tarjeta -->
+        <Style TargetType="Border" x:Key="CardStyle">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Padding" Value="25"/>
+            <Setter Property="Margin" Value="0,0,0,25"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000" Direction="270" ShadowDepth="2" BlurRadius="20" Opacity="0.08"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Estilo encabezado tabla -->
+        <Style TargetType="TextBlock" x:Key="TableHeaderStyle">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#2F5233"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="12,10"/>
+        </Style>
+
+        <!-- Estilo celdas tabla -->
+        <Style TargetType="TextBlock" x:Key="TableCellStyle">
+            <Setter Property="Foreground" Value="#2C3E50"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Botón principal -->
+        <Style TargetType="Button" x:Key="MainActionButtonStyle">
+            <Setter Property="Background" Value="#38761D"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="25,12"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#54993C"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#2F5233"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="40">
+
+            <!-- Encabezado -->
+            <TextBlock Text="Seguimiento de Proceso"
+                       FontSize="36" FontWeight="Bold"
+                       Foreground="#2F5233" Margin="0,0,0,10"/>
+            <TextBlock Text="Detalle y progreso de la actividad actual asignada."
+                       FontSize="16" Foreground="#7F8C8D" Margin="0,0,0,30"/>
+
+            <!-- Estado Actual -->
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Estado Actual de la Tarea" Style="{StaticResource SectionTitleStyle}"/>
+                    <Grid Margin="0,10,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Código Tarea:" FontWeight="SemiBold" Foreground="#333333" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="CodigoTareaText" Text="ACT-456" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        <TextBlock x:Name="PorcentajeProgresoText" Text="75%" Grid.Column="2" FontWeight="Bold" Foreground="#38761D" FontSize="20"/>
+                    </Grid>
+
+                    <ProgressBar x:Name="TaskProgressBar"
+                                 Value="75" Minimum="0" Maximum="100"
+                                 Height="15" 
+                                 BorderThickness="0"
+                                 Foreground="#38761D"/>
+
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Fecha de Inicio: 01/03/2024" Foreground="Gray"/>
+                        <TextBlock Text="Fecha Límite: 15/03/2024" Grid.Column="1" HorizontalAlignment="Right" Foreground="Gray"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Historial -->
+            <Border Style="{StaticResource CardStyle}" Height="316">
+                <StackPanel>
+                    <TextBlock Text="Historial de Actividades Recientes" Style="{StaticResource SectionTitleStyle}"/>
+
+                    <Border Background="#E8F5E9"
+                            CornerRadius="10,10,0,0"
+                            Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Paso" Style="{StaticResource TableHeaderStyle}"/>
+                            <TextBlock Grid.Column="1" Text="Descripción" Style="{StaticResource TableHeaderStyle}"/>
+                            <TextBlock Grid.Column="2" Text="Fecha Realizada" Style="{StaticResource TableHeaderStyle}"/>
+                            <TextBlock Grid.Column="3" Text="Horas" Style="{StaticResource TableHeaderStyle}"/>
+                        </Grid>
+                    </Border>
+
+                    <ItemsControl x:Name="ActividadesRecientesItemsControl">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#E8F5E9" BorderThickness="0,0,0,1" Background="White" Padding="5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.5*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="1.5*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="{Binding Paso}" Style="{StaticResource TableCellStyle}"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Descripcion}" TextWrapping="Wrap" Style="{StaticResource TableCellStyle}"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding FechaRealizada}" Style="{StaticResource TableCellStyle}"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding Horas}" Style="{StaticResource TableCellStyle}"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Border x:Name="NoActividadesBorder"
+                            Background="#F8F9FA"
+                            CornerRadius="0,0,10,10"
+                            Padding="20"
+                            Visibility="Collapsed">
+                        <TextBlock Text="No hay actividades registradas para esta tarea."
+                                   HorizontalAlignment="Center"
+                                   Foreground="#7F8C8D"
+                                   FontSize="14"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+ 
+                   
+        </StackPanel>
+    </ScrollViewer>
+</Page>
+

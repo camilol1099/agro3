@@ -10,24 +10,20 @@ namespace Entidades
     {
 
         public int IdTarea { get; set; }
+        public int IdCultivo { get; set; }
+        public int IdAdminCreador { get; set; }
         public string TipoActividad { get; set; }
-        public int FrecuenciaDias { get; set; }
         public DateTime FechaProgramada { get; set; }
-        public string Estado { get; set; }
         public decimal TiempoTotalTarea { get; set; }
+        public string Estado { get; set; }
+        public string EsRecurrente { get; set; }
+        public int? FrecuenciaDias { get; set; }
+        public decimal? CostoTransporte { get; set; }
 
-        public int Costo_Transporte { get; set; }
-        public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
-
-       
-        public List<AsignacionTarea> AsignacionesTarea { get; set; }
-        public List<DetalleTarea> DetallesTarea { get; set; }
-
-        public Tarea()
-        {
-            AsignacionesTarea = new List<AsignacionTarea>();
-            DetallesTarea = new List<DetalleTarea>();
-        }
+        // Relaciones
+        public Cultivo Cultivo { get; set; }
+        public Administrador AdminCreador { get; set; }
+        public List<DetalleTarea> Detalles { get; set; }
+        public List<AsignacionTarea> Asignaciones { get; set; }
     }
 }

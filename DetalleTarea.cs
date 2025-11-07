@@ -9,20 +9,12 @@ namespace Entidades
     public class DetalleTarea
     {
         public int IdDetalleTarea { get; set; }
-        public int CantidadUsada { get; set; }
-        public int TareaId { get; set; }
+        public int IdTarea { get; set; }
+        public int IdInsumo { get; set; }
+        public decimal CantidadUsada { get; set; }
+
+        // Relaciones
         public Tarea Tarea { get; set; }
-        public int InsumoId { get; set; }
         public Insumo Insumo { get; set; }
-
-        public DetalleTarea() { }
-
-        public DetalleTarea(int idDetalleTarea, int cantidadUsada, int tareaId, int insumoId)
-        {
-            IdDetalleTarea = idDetalleTarea;
-            CantidadUsada = cantidadUsada;
-            TareaId = tareaId;
-            InsumoId = insumoId;
-        }
     }
 }

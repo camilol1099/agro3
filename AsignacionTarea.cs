@@ -10,22 +10,18 @@ namespace Entidades
     {
 
         public int IdAsigTarea { get; set; }
+        public int IdTarea { get; set; }
+        public int IdEmpleado { get; set; }
+        public int IdAdminAsignador { get; set; }
+        public DateTime FechaAsignacion { get; set; }
         public decimal HorasTrabajadas { get; set; }
+        public decimal JornadasTrabajadas { get; set; }
+        public decimal PagoAcordado { get; set; }
+        public string Estado { get; set; }
 
-        public int Jornadas_Trabajadas { get; set; }
-        public int EmpleadoId { get; set; }
-        public Empleado Empleado { get; set; }
-        public int TareaId { get; set; }
+        // Relaciones
         public Tarea Tarea { get; set; }
-
-        public AsignacionTarea() { }
-
-        public AsignacionTarea(int idAsigTarea, decimal horasTrabajadas, int empleadoId, int tareaId)
-        {
-            IdAsigTarea = idAsigTarea;
-            HorasTrabajadas = horasTrabajadas;
-            EmpleadoId = empleadoId;
-            TareaId = tareaId;
-        }
+        public Empleado Empleado { get; set; }
+        public Administrador AdminAsignador { get; set; }
     }
 }

@@ -9,9 +9,17 @@ namespace Entidades
     public class Cosecha
     {
         public int IdCosecha { get; set; }
-        public string NombreLote { get; set; }
-        public DateTime FechaSiembra { get; set; }
-        public DateTime FechaCosechaEstimada { get; set; }
-        public string AlertaNBn { get; set; }
+        public int IdCultivo { get; set; }
+        public int IdAdminRegistro { get; set; }
+        public DateTime FechaCosecha { get; set; }
+        public DateTime FechaRegistro { get; set; }
+        public decimal CantidadObtenida { get; set; }
+        public string UnidadMedida { get; set; }
+        public string Calidad { get; set; }
+        public string Observaciones { get; set; }
+
+        // Relaciones
+        public Cultivo Cultivo { get; set; }
+        public Administrador AdminRegistro { get; set; }
     }
 }

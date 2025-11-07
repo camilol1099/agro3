@@ -7,11 +7,11 @@ using System.Windows;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("GUI")]
+[assembly: AssemblyTitle("Gui")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GUI")]
+[assembly: AssemblyProduct("Gui")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -31,7 +31,14 @@ using System.Windows;
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
 
-
+[assembly: ThemeInfo(
+    ResourceDictionaryLocation.None, //donde se encuentran los diccionarios de recursos específicos del tema
+                                     //(se utiliza si no se encuentra ningún recurso en la página,
+                                     // ni diccionarios de recursos de la aplicación)
+    ResourceDictionaryLocation.SourceAssembly //donde se encuentra el diccionario de recursos genérico
+                                              //(se utiliza si no se encuentra ningún recurso en la página,
+                                              // aplicación o diccionarios de recursos específicos del tema)
+)]
 
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:

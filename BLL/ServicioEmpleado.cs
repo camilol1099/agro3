@@ -21,15 +21,18 @@ namespace BLL
 
         public void GuardarEmpleado(Empleado empleado)
         {
-            if (empleado.IdEmpleado <= 0)
-                throw new Exception("El ID del empleado no es válido.");
+            if (empleado == null)
+                throw new Exception("El objeto empleado no puede ser nulo.");
+
+
             if (empleado.IdUsuario <= 0)
-                throw new Exception("El ID del usuario no puede ser cero.");
+                throw new Exception("El ID del usuario no puede ser cero o negativo.");
+
             if (empleado.MontoPorHora <= 0)
                 throw new Exception("El monto por hora debe ser mayor que 0.");
-            if (empleado.MontoMensual <= 0)
-                throw new Exception("El monto mensual debe ser mayor que 0.");
-            if (empleado.Monto_Por_Jornal <= 0)
+
+
+            if (empleado.MontoPorJornal <= 0)
                 throw new Exception("El monto por jornal debe ser mayor que 0.");
 
             repo.GuardarEmpleado(empleado);
@@ -45,17 +48,18 @@ namespace BLL
 
         public void ActualizarEmpleado(Empleado empleado)
         {
-            if (empleado.IdEmpleado <= 0)
-                throw new Exception("El ID del empleado no es válido.");
+            if (empleado == null)
+                throw new Exception("El objeto empleado no puede ser nulo.");
+
+
             if (empleado.IdUsuario <= 0)
-                throw new Exception("El ID del usuario no puede ser cero.");
+                throw new Exception("El ID del usuario no puede ser cero o negativo.");
+
             if (empleado.MontoPorHora <= 0)
                 throw new Exception("El monto por hora debe ser mayor que 0.");
-            repo.ActualizarEmpleado(empleado);
 
-            if (empleado.MontoMensual <= 0)
-                throw new Exception("El monto mensual debe ser mayor que 0.");
-            if (empleado.Monto_Por_Jornal <= 0)
+
+            if (empleado.MontoPorJornal <= 0)
                 throw new Exception("El monto por jornal debe ser mayor que 0.");
         }
 

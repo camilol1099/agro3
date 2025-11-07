@@ -9,21 +9,15 @@ namespace Entidades
     public class Empleado : Usuario
     {
 
-        public int IdEmpleado { get; set; }
+        public new int IdUsuario { get; set; }
         public decimal MontoPorHora { get; set; }
-        public decimal MontoMensual { get; set; }
-        public int Monto_Por_Jornal { get; set; }
-        public int UsuarioId { get; set; }
+        public decimal MontoPorJornal { get; set; }
+
+        // Relaciones
         public Usuario Usuario { get; set; }
+        public List<AsignacionTarea> Asignaciones { get; set; }
 
-        public List<AsignacionTarea> AsignacionesTarea { get; set; }
 
-        public Empleado()
-        {
-            AsignacionesTarea = new List<AsignacionTarea>();
-        }
-
-        
 
 
     }

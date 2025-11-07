@@ -17,8 +17,7 @@ namespace BLL
         }
         public void GuardarAdministrador(Entidades.Administrador admin)
         {
-            if (admin.IdAdministrador <= 0)
-                throw new Exception("El ID del administrador no es válido.");
+            
             if (admin.MontoMensual <= 0)
                 throw new Exception("El monto mensual debe ser mayor que cero.");
             repo.GuardarAdmin(admin);
@@ -30,19 +29,10 @@ namespace BLL
             repo.EliminarAdmin(idAdmin);
         }
 
-        public Entidades.Administrador ObtenerAdministradorPorId(int idAdmin)
-        {
-            var administradores = repo.ObtenerAdministradores();
-            var admin = administradores.FirstOrDefault(a => a.IdAdministrador == idAdmin);
-            if (admin == null)
-                throw new Exception("Administrador no encontrado.");
-            return admin;
-        }
+        
 
         public void ActualizarAdministrador(Entidades.Administrador admin)
         {
-            if (admin.IdAdministrador <= 0)
-                throw new Exception("El ID del administrador no es válido.");
             if (admin.MontoMensual <= 0)
                 throw new Exception("El monto mensual debe ser mayor que cero.");
             // Aquí podrías implementar la lógica para actualizar el administrador en la base de datos.

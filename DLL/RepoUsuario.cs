@@ -14,7 +14,16 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "SELECT IdUsuario, Cedula, Nombre, Email, Contrasena, Telefono, TipoUsuario FROM Usuario";
+                string query = @"SELECT 
+                                    ID_USUARIO, 
+                                    PRIMER_NOMBRE, 
+                                    SEGUNDO_NOMBRE, 
+                                    PRIMER_APELLIDO, 
+                                    SEGUNDO_APELLIDO,  
+                                    EMAIL, 
+                                    CONTRASENA, 
+                                    TELEFONO
+                                 FROM USUARIO";
 
                 using (var cmd = new OracleCommand(query, connection))
                 using (var reader = cmd.ExecuteReader())
@@ -23,13 +32,15 @@ namespace DLL
                     {
                         usuarios.Add(new Usuario
                         {
-                            IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
-                            Cedula = reader["Cedula"].ToString(),
-                            Nombre = reader["Nombre"].ToString(),
-                            Email = reader["Email"].ToString(),
-                            Contraseña = reader["Contrasena"].ToString(),
-                            Telefono = reader["Telefono"].ToString(),
-                            TipoUsuario = reader["TipoUsuario"].ToString()
+                            IdUsuario = Convert.ToInt32(reader["ID_USUARIO"]),
+                            Primer_Nombre = reader["PRIMER_NOMBRE"].ToString(),
+                            Segundo_Nombre = reader["SEGUNDO_NOMBRE"].ToString(),
+                            Apellido_Pri = reader["PRIMER_APELLIDO"].ToString(),
+                            Apellido_Segu = reader["SEGUNDO_APELLIDO"].ToString(),    // <-- cambio aquí
+                            Email = reader["EMAIL"].ToString(),
+                            Contraseña = reader["CONTRASENA"].ToString(),
+                            Telefono = Convert.ToInt64(reader["TELEFONO"]) // <-- cambio aquí
+
                         });
                     }
                 }
@@ -38,29 +49,34 @@ namespace DLL
             return usuarios;
         }
 
-        public void GuardarUsuario(Usuario usuario)
+        public string GuardarUsuario(Usuario usuario)
         {
             using (var connection = GetConnection())
             {
                 connection.Open();
 
-                string query = @"INSERT INTO Usuario 
-                                (IdUsuario, Cedula, Nombre, Email, Contrasena, Telefono, TipoUsuario)
-                                VALUES (:IdUsuario, :Cedula, :Nombre, :Email, :Contrasena, :Telefono, :TipoUsuario)";
+                string query = @"INSERT INTO USUARIO 
+                                (ID_USUARIO, PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, 
+                                 EMAIL, CONTRASENA, TELEFONO)
+                                VALUES 
+                                (:ID_USUARIO, :PRIMER_NOMBRE, :SEGUNDO_NOMBRE, :PRIMER_APELLIDO, :SEGUNDO_APELLIDO,
+                                 :EMAIL, :CONTRASENA, :TELEFONO)";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(":IdUsuario", usuario.IdUsuario);
-                    cmd.Parameters.Add(":Cedula", usuario.Cedula);
-                    cmd.Parameters.Add(":Nombre", usuario.Nombre);
-                    cmd.Parameters.Add(":Email", usuario.Email);
-                    cmd.Parameters.Add(":Contrasena", usuario.Contraseña);
-                    cmd.Parameters.Add(":Telefono", usuario.Telefono);
-                    cmd.Parameters.Add(":TipoUsuario", usuario.TipoUsuario);
+                    cmd.Parameters.Add(":ID_USUARIO", usuario.IdUsuario);
+                    cmd.Parameters.Add(":PRIMER_NOMBRE", usuario.Primer_Nombre);
+                    cmd.Parameters.Add(":SEGUNDO_NOMBRE", usuario.Segundo_Nombre);
+                    cmd.Parameters.Add(":PRIMER_APELLIDO", usuario.Apellido_Pri);
+                    cmd.Parameters.Add(":SEGUNDO_APELLIDO", usuario.Apellido_Segu);
+                    cmd.Parameters.Add(":EMAIL", usuario.Email);
+                    cmd.Parameters.Add(":CONTRASENA", usuario.Contraseña);
+                    cmd.Parameters.Add(":TELEFONO", usuario.Telefono);
 
                     cmd.ExecuteNonQuery();
                 }
             }
+            return "Usuario registrado correctamente ✅";
         }
 
         public void EliminarUsuario(int idUsuario)
@@ -68,11 +84,11 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "DELETE FROM Usuario WHERE IdUsuario = :IdUsuario";
+                string query = "DELETE FROM USUARIO WHERE ID_USUARIO = :ID_USUARIO";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(":IdUsuario", idUsuario);
+                    cmd.Parameters.Add(":ID_USUARIO", idUsuario);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -84,28 +100,80 @@ namespace DLL
             {
                 connection.Open();
 
-                string query = @"UPDATE Usuario 
-                                 SET Cedula = :Cedula, 
-                                     Nombre = :Nombre, 
-                                     Email = :Email, 
-                                     Contrasena = :Contrasena, 
-                                     Telefono = :Telefono, 
-                                     TipoUsuario = :TipoUsuario
-                                 WHERE IdUsuario = :IdUsuario";
+                string query = @"UPDATE USUARIO 
+                                 SET PRIMER_NOMBRE = :PRIMER_NOMBRE,
+                                     SEGUNDO_NOMBRE = :SEGUNDO_NOMBRE,
+                                     PRIMER_APELLIDO = :PRIMER_APELLIDO,
+                                     SEGUNDO_APELLIDO = :SEGUNDO_APELLIDO,
+                                     EMAIL = :EMAIL,
+                                     CONTRASENA = :CONTRASENA,
+                                     TELEFONO = :TELEFONO
+                                 WHERE ID_USUARIO = :ID_USUARIO";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(":Cedula", usuario.Cedula);
-                    cmd.Parameters.Add(":Nombre", usuario.Nombre);
-                    cmd.Parameters.Add(":Email", usuario.Email);
-                    cmd.Parameters.Add(":Contrasena", usuario.Contraseña);
-                    cmd.Parameters.Add(":Telefono", usuario.Telefono);
-                    cmd.Parameters.Add(":TipoUsuario", usuario.TipoUsuario);
-                    cmd.Parameters.Add(":IdUsuario", usuario.IdUsuario);
+                    cmd.Parameters.Add(":PRIMER_NOMBRE", usuario.Primer_Nombre);
+                    cmd.Parameters.Add(":SEGUNDO_NOMBRE", usuario.Segundo_Nombre);
+                    cmd.Parameters.Add(":PRIMER_APELLIDO", usuario.Apellido_Pri);
+                    cmd.Parameters.Add(":SEGUNDO_APELLIDO", usuario.Apellido_Segu);
+
+                    // Convertir string a número si no está vacío
+                    cmd.Parameters.Add(":EMAIL", usuario.Email);
+                    cmd.Parameters.Add(":CONTRASENA", usuario.Contraseña);
+                    cmd.Parameters.Add(":TELEFONO", Convert.ToInt64(usuario.Telefono));
+                    cmd.Parameters.Add(":ID_USUARIO", usuario.IdUsuario);
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
+        public Usuario ObtenerUsuarioPorId(int id)
+        {
+            Usuario usuario = null;
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string query = @"SELECT 
+                            ID_USUARIO, 
+                            PRIMER_NOMBRE, 
+                            SEGUNDO_NOMBRE, 
+                            PRIMER_APELLIDO, 
+                            SEGUNDO_APELLIDO,  
+                            EMAIL, 
+                            CONTRASENA, 
+                            TELEFONO
+                         FROM USUARIO
+                         WHERE ID_USUARIO = :id";
+
+                using (var cmd = new OracleCommand(query, connection))
+                {
+                    cmd.Parameters.Add(":id", OracleDbType.Int32).Value = id;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            usuario = new Usuario
+                            {
+                                IdUsuario = Convert.ToInt32(reader["ID_USUARIO"]),
+                                Primer_Nombre = reader["PRIMER_NOMBRE"].ToString(),
+                                Segundo_Nombre = reader["SEGUNDO_NOMBRE"].ToString(),
+                                Apellido_Pri = reader["PRIMER_APELLIDO"].ToString(),
+                                Apellido_Segu = reader["SEGUNDO_APELLIDO"].ToString(),
+                                Email = reader["EMAIL"].ToString(),
+                                Contraseña = reader["CONTRASENA"].ToString(),
+                                Telefono = Convert.ToInt64(reader["TELEFONO"])
+                            };
+                        }
+                    }
+                }
+            }
+
+            return usuario;
+        }
+
     }
 }
+

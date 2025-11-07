@@ -14,7 +14,10 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "SELECT IdCosecha, NombreLote, FechaSiembra, FechaCosechaEstimada, AlertaNBn FROM Cosecha";
+                string query = @"SELECT ID_COSECHA, ID_CULTIVO, ID_ADMIN_REGISTRO, 
+                                        FECHA_COSECHA, FECHA_REGISTRO, 
+                                        CANTIDAD_OBTENIDA, UNIDAD_MEDIDA, CALIDAD, OBSERVACIONES 
+                                 FROM COSECHA";
 
                 using (var cmd = new OracleCommand(query, connection))
                 using (var reader = cmd.ExecuteReader())
@@ -23,11 +26,15 @@ namespace DLL
                     {
                         cosechas.Add(new Cosecha
                         {
-                            IdCosecha = Convert.ToInt32(reader["IdCosecha"]),
-                            NombreLote = reader["NombreLote"].ToString(),
-                            FechaSiembra = Convert.ToDateTime(reader["FechaSiembra"]),
-                            FechaCosechaEstimada = Convert.ToDateTime(reader["FechaCosechaEstimada"]),
-                            AlertaNBn = reader["AlertaNBn"] == DBNull.Value ? null : reader["AlertaNBn"].ToString()
+                            IdCosecha = Convert.ToInt32(reader["ID_COSECHA"]),
+                            IdCultivo = Convert.ToInt32(reader["ID_CULTIVO"]),
+                            IdAdminRegistro = Convert.ToInt32(reader["ID_ADMIN_REGISTRO"]),
+                            FechaCosecha = Convert.ToDateTime(reader["FECHA_COSECHA"]),
+                            FechaRegistro = Convert.ToDateTime(reader["FECHA_REGISTRO"]),
+                            CantidadObtenida = Convert.ToDecimal(reader["CANTIDAD_OBTENIDA"]),
+                            UnidadMedida = reader["UNIDAD_MEDIDA"].ToString(),
+                            Calidad = reader["CALIDAD"].ToString(),
+                            Observaciones = reader["OBSERVACIONES"] == DBNull.Value ? null : reader["OBSERVACIONES"].ToString()
                         });
                     }
                 }
@@ -41,17 +48,23 @@ namespace DLL
             {
                 connection.Open();
 
-                // ⚙️ Usamos una secuencia para autogenerar el IdCosecha
-                string query = @"INSERT INTO Cosecha 
-                                 (IdCosecha, NombreLote, FechaSiembra, FechaCosechaEstimada, AlertaNBn)
-                                 VALUES (SEQ_COSECHA.NEXTVAL, :NombreLote, :FechaSiembra, :FechaCosechaEstimada, :AlertaNBn)";
+                string query = @"INSERT INTO COSECHA 
+                                (ID_COSECHA, ID_CULTIVO, ID_ADMIN_REGISTRO, FECHA_COSECHA, FECHA_REGISTRO, 
+                                 CANTIDAD_OBTENIDA, UNIDAD_MEDIDA, CALIDAD, OBSERVACIONES)
+                                VALUES (SEQ_COSECHA.NEXTVAL, :ID_CULTIVO, :ID_ADMIN_REGISTRO, 
+                                        :FECHA_COSECHA, :FECHA_REGISTRO, :CANTIDAD_OBTENIDA, 
+                                        :UNIDAD_MEDIDA, :CALIDAD, :OBSERVACIONES)";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(":NombreLote", cosecha.NombreLote);
-                    cmd.Parameters.Add(":FechaSiembra", cosecha.FechaSiembra);
-                    cmd.Parameters.Add(":FechaCosechaEstimada", cosecha.FechaCosechaEstimada);
-                    cmd.Parameters.Add(":AlertaNBn", cosecha.AlertaNBn ?? (object)DBNull.Value);
+                    cmd.Parameters.Add(":ID_CULTIVO", cosecha.IdCultivo);
+                    cmd.Parameters.Add(":ID_ADMIN_REGISTRO", cosecha.IdAdminRegistro);
+                    cmd.Parameters.Add(":FECHA_COSECHA", cosecha.FechaCosecha);
+                    cmd.Parameters.Add(":FECHA_REGISTRO", cosecha.FechaRegistro);
+                    cmd.Parameters.Add(":CANTIDAD_OBTENIDA", cosecha.CantidadObtenida);
+                    cmd.Parameters.Add(":UNIDAD_MEDIDA", cosecha.UnidadMedida);
+                    cmd.Parameters.Add(":CALIDAD", cosecha.Calidad);
+                    cmd.Parameters.Add(":OBSERVACIONES", cosecha.Observaciones ?? (object)DBNull.Value);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -63,11 +76,11 @@ namespace DLL
             using (var connection = GetConnection())
             {
                 connection.Open();
-                string query = "DELETE FROM Cosecha WHERE IdCosecha = :IdCosecha";
+                string query = "DELETE FROM COSECHA WHERE ID_COSECHA = :ID_COSECHA";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(":IdCosecha", idCosecha);
+                    cmd.Parameters.Add(":ID_COSECHA", idCosecha);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -79,20 +92,28 @@ namespace DLL
             {
                 connection.Open();
 
-                string query = @"UPDATE Cosecha 
-                                 SET NombreLote = :NombreLote,
-                                     FechaSiembra = :FechaSiembra,
-                                     FechaCosechaEstimada = :FechaCosechaEstimada,
-                                     AlertaNBn = :AlertaNBn
-                                 WHERE IdCosecha = :IdCosecha";
+                string query = @"UPDATE COSECHA 
+                                 SET ID_CULTIVO = :ID_CULTIVO,
+                                     ID_ADMIN_REGISTRO = :ID_ADMIN_REGISTRO,
+                                     FECHA_COSECHA = :FECHA_COSECHA,
+                                     FECHA_REGISTRO = :FECHA_REGISTRO,
+                                     CANTIDAD_OBTENIDA = :CANTIDAD_OBTENIDA,
+                                     UNIDAD_MEDIDA = :UNIDAD_MEDIDA,
+                                     CALIDAD = :CALIDAD,
+                                     OBSERVACIONES = :OBSERVACIONES
+                                 WHERE ID_COSECHA = :ID_COSECHA";
 
                 using (var cmd = new OracleCommand(query, connection))
                 {
-                    cmd.Parameters.Add(":NombreLote", cosecha.NombreLote);
-                    cmd.Parameters.Add(":FechaSiembra", cosecha.FechaSiembra);
-                    cmd.Parameters.Add(":FechaCosechaEstimada", cosecha.FechaCosechaEstimada);
-                    cmd.Parameters.Add(":AlertaNBn", cosecha.AlertaNBn ?? (object)DBNull.Value);
-                    cmd.Parameters.Add(":IdCosecha", cosecha.IdCosecha);
+                    cmd.Parameters.Add(":ID_CULTIVO", cosecha.IdCultivo);
+                    cmd.Parameters.Add(":ID_ADMIN_REGISTRO", cosecha.IdAdminRegistro);
+                    cmd.Parameters.Add(":FECHA_COSECHA", cosecha.FechaCosecha);
+                    cmd.Parameters.Add(":FECHA_REGISTRO", cosecha.FechaRegistro);
+                    cmd.Parameters.Add(":CANTIDAD_OBTENIDA", cosecha.CantidadObtenida);
+                    cmd.Parameters.Add(":UNIDAD_MEDIDA", cosecha.UnidadMedida);
+                    cmd.Parameters.Add(":CALIDAD", cosecha.Calidad);
+                    cmd.Parameters.Add(":OBSERVACIONES", cosecha.Observaciones ?? (object)DBNull.Value);
+                    cmd.Parameters.Add(":ID_COSECHA", cosecha.IdCosecha);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -100,5 +121,4 @@ namespace DLL
         }
     }
 }
-
 
